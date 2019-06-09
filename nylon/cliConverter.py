@@ -5,6 +5,7 @@ import colorsys
 import cv2
 import sys
 import time
+from os import system, name
 
 
 class terminalColor:
@@ -58,6 +59,15 @@ class cliConverter:
 
         return exampleStr
 
+    # コンソールをクリア
+    def clearConsole(self):
+        # window
+        if name == 'nt':
+            _ = system('cls')
+        # mac, linux
+        else:
+            _ = system('clear')
+
     # terminalImage: Back.{colorName}の二次元配列
     def terminalImageToStr(self, terminalImage):
         tImageHeight, tImageWidth = len(terminalImage), len(terminalImage[0])
@@ -75,6 +85,7 @@ class cliConverter:
 
     # rgb: 0〜250
     # hue: 0〜360
+
     def rgbToHue(self, r, g, b):
         # rgb値を0〜1の範囲にキャストして渡す
         hue = colorsys.rgb_to_hsv(r/255, g/255, b/255)[0]
